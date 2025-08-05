@@ -1,13 +1,14 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.css";
 import Showuser from "./Showuser";
-import { Icon } from "@iconify/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFlag } from '@fortawesome/free-solid-svg-icons';
+// import { Icon } from "@iconify/react";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faFlag } from '@fortawesome/free-solid-svg-icons';
 
 function Home() {
   const [datasearch, setDatasearch] = useState([]);
@@ -154,17 +155,17 @@ function Home() {
     handleTranslate();
   };
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    fade: true,
-    cssEase: "linear",
-  };
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   autoplay: true,
+  //   autoplaySpeed: 3000,
+  //   fade: true,
+  //   cssEase: "linear",
+  // };
 
 
   return (
