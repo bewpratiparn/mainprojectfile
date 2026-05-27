@@ -1,24 +1,24 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 
-import Home from "../paeges/Home";
+import Home from "../pages/Home/Home";
 import Search from "../components/Search";
-import Home2 from "../paeges/Home2";
-import Home3 from "../paeges/Home3";
-import Login from "../paeges/Login";
-import Logout from "../paeges/Logout";
-import Register from "../paeges/Register";
-import Translate from "../paeges/Translate";
-import AddFood from "../paeges/AddFood";
-import AddDataShop from "../paeges/AddDataShop";
-import RecipeDetail from "../paeges/RecipeDetail";
-import Fooddetails from "../paeges/Fooddetails";
-import Editstore from "../paeges/Editstore";
-import Store_information from "../paeges/Store_information";
-import Notshowfood from "../paeges/Notshowfood";
-import Profile from "../paeges/Profile";
-import Slideshow from "../paeges/Slideshow";
-import Showuser from "../paeges/Showuser";
+import Home2 from "../pages/Home/Home2";
+import Home3 from "../pages/Home/Home3";
+import Login from "../pages/Auth/Login";
+import Logout from "../pages/Auth/Logout";
+import Register from "../pages/Auth/Register";
+import Translate from "../pages/Misc/Translate";
+import AddFood from "../pages/Food/AddFood";
+import AddDataShop from "../pages/Shop/AddDataShop";
+import RecipeDetail from "../pages/Food/RecipeDetail";
+import Fooddetails from "../pages/Food/Fooddetails";
+import Editstore from "../pages/Shop/Editstore";
+import Store_information from "../pages/Shop/Store_information";
+import Notshowfood from "../pages/Food/Notshowfood";
+import Profile from "../pages/User/Profile";
+import Slideshow from "../pages/Misc/Slideshow";
+import Showuser from "../pages/User/Showuser";
 
 export const router = createBrowserRouter([
   {
