@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
+import AuthService from "../lib/authApi";
 import { Icon } from "@iconify/react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -38,18 +39,9 @@ function Register() {
         picture: base64String,
       };
 
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-        redirect: "follow",
-      };
-
-      fetch("http://127.0.0.1:8000/register/", requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
+      AuthService.register(data)
+        .then((response) => {
+          const result = response.data;
           if (result) {
             MySwal.fire({
               html: <i>{result.message}</i>,

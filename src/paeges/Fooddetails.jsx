@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import FoodService from "../lib/foodApi";
+import TranslateService from "../lib/translateApi";
 import { Icon } from "@iconify/react";
 import { Button, CircularProgress } from "@mui/material";
 import "./Fooddetails.css";
@@ -17,8 +18,7 @@ function Fooddetails() {
   const [isThai, setIsThai] = useState(true); // state to track the current language
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/show_all_food/")
+    FoodService.getAllFood()
       .then((response) => {
         const foodItem = response.data.find(
           (item) => item.food_id === parseInt(foodId)
@@ -38,13 +38,9 @@ function Fooddetails() {
   }, [foodId]);
 
   const translate = async (text, targetLang) => {
-    const apiUrl =
-      targetLang === "en"
-        ? "http://127.0.0.1:8000/translate/th-en/"
-        : "http://127.0.0.1:8000/translate/en-th/";
-
+    const direction = targetLang === "en" ? "th-en" : "en-th";
     try {
-      const response = await axios.post(apiUrl, { text });
+      const response = await TranslateService.translate(direction, text);
       return response.data.translated_text;
     } catch (error) {
       console.error("Error translating text:", error);

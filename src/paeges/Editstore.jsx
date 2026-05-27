@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import AuthService from "../lib/authApi";
+import ShopService from "../lib/shopApi";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import Swal from "sweetalert2";
@@ -35,22 +36,11 @@ function Editstore() {
         }
 
         // Fetch user data
-        const userResponse = await axios.get(
-          "http://127.0.0.1:8000/authorize/",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const userResponse = await AuthService.getProfile();
         setUserData(userResponse.data);
 
         // Fetch shops data
-        const shopsResponse = await axios.get("http://127.0.0.1:8000/shops/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const shopsResponse = await ShopService.getShops();
 
         // Filter shops to display only shops owned by the logged-in user
         const userShops = shopsResponse.data.filter(
@@ -128,16 +118,7 @@ function Editstore() {
         throw new Error("User not logged in");
       }
 
-      const response = await axios.put(
-        `http://127.0.0.1:8000/edit_shop/${editShopId}`,
-        editShopData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await ShopService.editShop(editShopId, editShopData);
       Swal.fire({
         title: "Success",
         text: response.data.message,
@@ -146,11 +127,7 @@ function Editstore() {
         navigate("/Home");
       });
       // Fetch updated shop data after editing
-      const updatedShops = await axios.get("http://127.0.0.1:8000/shops/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const updatedShops = await ShopService.getShops();
       setShops(updatedShops.data);
       setEditShopId(null);
     } catch (error) {

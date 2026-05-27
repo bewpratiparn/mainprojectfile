@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AuthService from "../lib/authApi";
 import "./Showuser.css"; // Import CSS file
 import { Icon } from "@iconify/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,18 +13,9 @@ function Showuser() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("http://127.0.0.1:8000/authorize/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setUser(data);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-        });
+      AuthService.getProfile()
+        .then((response) => setUser(response.data))
+        .catch((error) => console.error("Error fetching user data:", error));
     }
   }, []);
 

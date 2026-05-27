@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import FoodService from "../lib/foodApi";
+import TranslateService from "../lib/translateApi";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import "./Store_information.css";
 import { Icon } from "@iconify/react";
@@ -39,8 +40,7 @@ function Store_information() {
   });
 
   useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/show_all_food/?shop_id=${shopId}`)
+    FoodService.getAllFood(shopId)
       .then((response) => {
         const filteredFoodItems = response.data.filter(
           (item) => item.shop_id === parseInt(shopId)
@@ -58,84 +58,42 @@ function Store_information() {
     setLanguage(lang);
     const fromLang = lang === "th" ? "en" : "th";
 
-    axios
-      .get(
-        `http://127.0.0.1:8000/translate/${fromLang}-${lang}/?sentences=${shopName}`
-      )
-      .then((response) => {
-        setTranslatedShopName(response.data.translated_text);
-      })
-      .catch((error) => {
-        console.error("Error fetching translated shop name:", error);
-      });
+    const dir = `${fromLang}-${lang}`
 
-    axios
-      .get(
-        `http://127.0.0.1:8000/translate/${fromLang}-${lang}/?sentences=${shopLocation}`
-      )
-      .then((response) => {
-        setTranslatedShopLocation(response.data.translated_text);
-      })
-      .catch((error) => {
-        console.error("Error fetching translated shop location:", error);
-      });
+    TranslateService.get(dir, shopName)
+      .then((response) => setTranslatedShopName(response.data.translated_text))
+      .catch((error) => console.error("Error fetching translated shop name:", error));
 
-    axios
-      .get(
-        `http://127.0.0.1:8000/translate/${fromLang}-${lang}/?sentences=${shopPhone}`
-      )
-      .then((response) => {
-        setTranslatedShopPhone(response.data.translated_text);
-      })
-      .catch((error) => {
-        console.error("Error fetching translated shop phone:", error);
-      });
+    TranslateService.get(dir, shopLocation)
+      .then((response) => setTranslatedShopLocation(response.data.translated_text))
+      .catch((error) => console.error("Error fetching translated shop location:", error));
 
-    axios
-      .get(
-        `http://127.0.0.1:8000/translate/${fromLang}-${lang}/?sentences=${shopTime}`
-      )
-      .then((response) => {
-        setTranslatedShopTime(response.data.translated_text);
-      })
-      .catch((error) => {
-        console.error("Error fetching translated shop time:", error);
-      });
+    TranslateService.get(dir, shopPhone)
+      .then((response) => setTranslatedShopPhone(response.data.translated_text))
+      .catch((error) => console.error("Error fetching translated shop phone:", error));
 
-    axios
-      .get(
-        `http://127.0.0.1:8000/translate/${fromLang}-${lang}/?sentences=${shopText}`
-      )
-      .then((response) => {
-        setTranslatedShopText(response.data.translated_text);
-      })
-      .catch((error) => {
-        console.error("Error fetching translated shop text:", error);
-      });
+    TranslateService.get(dir, shopTime)
+      .then((response) => setTranslatedShopTime(response.data.translated_text))
+      .catch((error) => console.error("Error fetching translated shop time:", error));
 
-    const translatedItemsPromises = foodItems.map((item) => {
-      const foodNamePromise = axios.get(
-        `http://127.0.0.1:8000/translate/${fromLang}-${lang}/?sentences=${item.Food_name}`
-      );
-      const foodPricePromise = axios.get(
-        `http://127.0.0.1:8000/translate/${fromLang}-${lang}/?sentences=${item.Food_price}`
-      );
-      return Promise.all([foodNamePromise, foodPricePromise]).then(
-        ([foodNameResponse, foodPriceResponse]) => ({
-          ...item,
-          Food_name: foodNameResponse.data.translated_text,
-          Food_price: foodPriceResponse.data.translated_text,
-        })
-      );
-    });
+    TranslateService.get(dir, shopText)
+      .then((response) => setTranslatedShopText(response.data.translated_text))
+      .catch((error) => console.error("Error fetching translated shop text:", error));
+
+    const translatedItemsPromises = foodItems.map((item) =>
+      Promise.all([
+        TranslateService.get(dir, item.Food_name),
+        TranslateService.get(dir, item.Food_price),
+      ]).then(([nameRes, priceRes]) => ({
+        ...item,
+        Food_name: nameRes.data.translated_text,
+        Food_price: priceRes.data.translated_text,
+      }))
+    );
 
     Promise.all(translatedItemsPromises)
-      .then((translatedItems) => {
-        setTranslatedFoodItems(translatedItems);
-      })
-      .catch((error) => {
-        console.error("Error fetching translated food items:", error);
-      });
+      .then((translatedItems) => setTranslatedFoodItems(translatedItems))
+      .catch((error) => console.error("Error fetching translated food items:", error));
 
     const labelsToTranslate = [
       "ชื่อร้านค้า :",
@@ -149,15 +107,9 @@ function Store_information() {
       "ดูรายละเอียด",
     ];
 
-    const translatedLabelsPromises = labelsToTranslate.map((label) =>
-      axios
-        .get(
-          `http://127.0.0.1:8000/translate/${fromLang}-${lang}/?sentences=${label}`
-        )
-        .then((response) => response.data.translated_text)
-    );
-
-    Promise.all(translatedLabelsPromises)
+    Promise.all(labelsToTranslate.map((label) =>
+      TranslateService.get(dir, label).then((r) => r.data.translated_text)
+    ))
       .then((translatedLabelsArray) => {
         setTranslatedLabels({
           shopNameLabel: translatedLabelsArray[0],
@@ -171,9 +123,7 @@ function Store_information() {
           watchdetail: translatedLabelsArray[8],
         });
       })
-      .catch((error) => {
-        console.error("Error fetching translated labels:", error);
-      });
+      .catch((error) => console.error("Error fetching translated labels:", error));
   };
 
   const handleClick = () => {

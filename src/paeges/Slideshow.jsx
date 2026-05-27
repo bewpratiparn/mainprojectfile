@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import FoodService from '../lib/foodApi';
 import './Slideshow.css'; // Import CSS file or add styles inline
 
 function Slideshow() {
@@ -7,11 +8,10 @@ function Slideshow() {
 
   useEffect(() => {
     // ดึงข้อมูลร้านอาหารจาก API
-    fetch('http://127.0.0.1:8000/show_all_food/')
-      .then(response => response.json())
-      .then(data => {
-        setSlidesData(data); // กำหนดข้อมูลร้านอาหารทั้งหมด
-        showSlides(slideIndex); // แสดง slides เมื่อข้อมูลถูกดึงมาแล้ว
+    FoodService.getAllFood()
+      .then(response => {
+        setSlidesData(response.data);
+        showSlides(slideIndex);
       })
       .catch(error => {
         console.error("เกิดข้อผิดพลาดในการดึงข้อมูลร้านอาหาร:", error);

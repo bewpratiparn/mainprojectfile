@@ -1,11 +1,54 @@
-# React + Vite
+# Translate Food Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+โปรเจกต์นี้สร้างขึ้นด้วย [React](https://react.dev/) และ [Vite](https://vitejs.dev/)
 
-Currently, two official plugins are available:
+## วิธีการติดตั้ง Dependencies (Installation)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-"# project" 
-"# my-project-react"  
-"# my-project-react"  
+ก่อนที่จะเริ่มรันโปรเจกต์ ต้องทำการติดตั้ง package และ dependencies ต่างๆ ก่อน 
+โดยให้เปิด Terminal แล้วเข้าไปที่โฟลเดอร์ root ของโปรเจกต์ (`/mainprojectfile`) จากนั้นรันคำสั่งใดคำสั่งหนึ่งด้านล่างนี้:
+
+หากใช้ **npm**:
+```bash
+npm install
+```
+
+หรือหากใช้ **yarn**:
+```bash
+yarn install
+```
+
+## วิธีการรันโปรเจกต์ (Running the app)
+
+หลังจากติดตั้ง dependencies เสร็จเรียบร้อยแล้ว สามารถเริ่มการทำงานของ Development Server ได้ด้วยคำสั่ง:
+
+หากใช้ **npm**:
+```bash
+npm run dev
+```
+
+หรือหากใช้ **yarn**:
+```bash
+yarn dev
+```
+
+หลังจากรันคำสั่ง โปรเจกต์จะเริ่มทำงานและคุณสามารถเปิดดูในเบราว์เซอร์ได้ที่ (โดยปกติจะเป็น `http://localhost:5173/`)
+
+## คำสั่งอื่นๆ (Available Scripts)
+
+- **สร้าง Build สำหรับ Production**:
+  ```bash
+  npm run build
+  # หรือ yarn build
+  ```
+
+- **พรีวิว Production Build**:
+  ```bash
+  npm run preview
+  # หรือ yarn preview
+  ```
+
+- **รัน Linter (เพื่อตรวจสอบโค้ด)**:
+  ```bash
+  npm run lint
+  # หรือ yarn lint
+  ```

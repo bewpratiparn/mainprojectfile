@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import "./translate.css";
-import axios from "axios";
+import TranslateService from "../lib/translateApi";
 import "semantic-ui-css/semantic.min.css";
 import { Icon } from "@iconify/react";
 import Swal from "sweetalert2";
@@ -19,12 +19,7 @@ function Translate() {
       const translationDirection =
         selectedLanguage === "en" ? "th-en" : "en-th";
 
-      const response = await axios.post(
-        `http://127.0.0.1:8000/translate/${translationDirection}/`,
-        {
-          text: inputText,
-        }
-      );
+      const response = await TranslateService.translate(translationDirection, inputText);
 
       setTranslatedText(response.data.translated_text);
     } catch (error) {

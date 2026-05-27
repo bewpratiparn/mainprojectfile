@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import axios from "axios";
+import FoodService from "../lib/foodApi";
 import Resizer from "react-image-file-resizer";
 import "./AddFood.css";
 
@@ -50,19 +50,13 @@ function AddFood() {
     const userToken = localStorage.getItem("token");
 
     if (userToken) {
-      const headers = {
-        Authorization: `Bearer ${userToken}`,
-        "Content-Type": "application/json",
-      };
-
       const formData = new FormData();
       formData.append("Food_name", input.Food_name);
       formData.append("Food_element", input.Food_element);
       formData.append("Food_price", input.Food_price);
       formData.append("Food_picture", imageURL);
 
-      axios
-        .post("http://127.0.0.1:8000/add_food/", formData, { headers })
+      FoodService.addFood(formData)
         .then((response) => {
           if (response.data.message === "Food data added successfully") {
             MySwal.fire({

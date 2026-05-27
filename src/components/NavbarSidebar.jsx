@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ShopService from "../lib/shopApi";
 import "./Sidebar.css";
 import Showuser from "../paeges/Showuser";
 import { Icon } from "@iconify/react";
@@ -51,11 +52,10 @@ const Sidebar = () => {
 
   // Fetch shop ID from the API
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/shops/")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data && data.shopId) {
-          setShopId(data.shopId);
+    ShopService.getShops()
+      .then((response) => {
+        if (response.data && response.data.shopId) {
+          setShopId(response.data.shopId);
         }
       })
       .catch((error) => {

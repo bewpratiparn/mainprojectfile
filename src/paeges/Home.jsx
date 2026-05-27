@@ -1,6 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ShopService from "../lib/shopApi";
+import FoodService from "../lib/foodApi";
+import TranslateService from "../lib/translateApi";
 // import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -20,10 +23,9 @@ function Home() {
   const [language, setLanguage] = useState("th");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/shops/")
-      .then((res) => res.json())
-      .then((data) => {
-        const uniqueShops = data.filter(
+    ShopService.getShops()
+      .then((res) => {
+        const uniqueShops = res.data.filter(
           (shop, index, self) =>
             index === self.findIndex((s) => s.shop_id === shop.shop_id)
         );
@@ -33,11 +35,10 @@ function Home() {
       })
       .catch((err) => console.log(err));
 
-    fetch("http://127.0.0.1:8000/show_all_food/")
-      .then((res) => res.json())
-      .then((data) => {
-        setFoodData(data);
-        setOriginalData((prev) => ({ ...prev, foods: data }));
+    FoodService.getAllFood()
+      .then((res) => {
+        setFoodData(res.data);
+        setOriginalData((prev) => ({ ...prev, foods: res.data }));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -85,44 +86,17 @@ function Home() {
       .map((food) => food.Food_name)
       .join(",");
 
-    const translateShopNames = fetch(
-      `http://127.0.0.1:8000/translate/${fromLang}-${toLang}/?sentences=${encodeURIComponent(
-        shopNames
-      )}`
-    );
-    const translateShopLocations = fetch(
-      `http://127.0.0.1:8000/translate/${fromLang}-${toLang}/?sentences=${encodeURIComponent(
-        shopLocations
-      )}`
-    );
-    const translateShopTimes = fetch(
-      `http://127.0.0.1:8000/translate/${fromLang}-${toLang}/?sentences=${encodeURIComponent(
-        shopTimes
-      )}`
-    );
-    const translateFoodNames = fetch(
-      `http://127.0.0.1:8000/translate/${fromLang}-${toLang}/?sentences=${encodeURIComponent(
-        foodNames
-      )}`
-    );
-
     Promise.all([
-      translateShopNames,
-      translateShopLocations,
-      translateShopTimes,
-      translateFoodNames,
+      TranslateService.get(`${fromLang}-${toLang}`, shopNames),
+      TranslateService.get(`${fromLang}-${toLang}`, shopLocations),
+      TranslateService.get(`${fromLang}-${toLang}`, shopTimes),
+      TranslateService.get(`${fromLang}-${toLang}`, foodNames),
     ])
-      .then((responses) =>
-        Promise.all(
-          responses.map((res) => {
-            if (!res.ok) {
-              throw new Error("Network response was not ok");
-            }
-            return res.json();
-          })
-        )
-      )
-      .then(([namesData, locationsData, timesData, foodNamesData]) => {
+      .then(([namesRes, locationsRes, timesRes, foodNamesRes]) => {
+        const namesData = namesRes.data;
+        const locationsData = locationsRes.data;
+        const timesData = timesRes.data;
+        const foodNamesData = foodNamesRes.data;
         const translatedNames = namesData.translated_text.split(",");
         const translatedLocations = locationsData.translated_text.split(",");
         const translatedTimes = timesData.translated_text.split(",");

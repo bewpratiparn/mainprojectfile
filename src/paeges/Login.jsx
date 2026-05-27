@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
+import AuthService from "../lib/authApi";
 import { Icon } from "@iconify/react";
 import Swal from "sweetalert2";
 import "./Login.css";
@@ -12,18 +13,9 @@ function Login() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("http://127.0.0.1:8000/authorize/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setUser(data);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-        });
+      AuthService.getProfile()
+        .then((response) => setUser(response.data))
+        .catch((error) => console.error("Error fetching user data:", error));
     }
   }, []);
 
@@ -37,30 +29,9 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({
-      username: inputs.username,
-      password: inputs.password,
-    });
-
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("http://127.0.0.1:8000/login/", requestOptions)
+    AuthService.login(inputs.username, inputs.password)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to login");
-        }
-        return response.json();
-      })
-      .then((result) => {
-        localStorage.setItem("token", result.token);
+        localStorage.setItem("token", response.data.token);
         navigate("/Home");
         Swal.fire({
           icon: "success",

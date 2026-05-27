@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-import axios from "axios";
+import ShopService from "../lib/shopApi";
 import "./AddDataShop.css";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 
@@ -46,11 +46,6 @@ function AddDataShop() {
     const userToken = localStorage.getItem("token");
 
     if (userToken) {
-      const headers = {
-        Authorization: `Bearer ${userToken}`,
-        "Content-Type": "application/json",
-      };
-
       const formData = new FormData();
       formData.append("shop_name", addShop.storename);
       formData.append("shop_location", addShop.location);
@@ -59,8 +54,7 @@ function AddDataShop() {
       formData.append("shop_type", addShop.shop_type);
       formData.append("shop_picture", imageURL);
 
-      axios
-        .post("http://127.0.0.1:8000/add_shop/", formData, { headers })
+      ShopService.addShop(formData)
         .then((response) => {
           if (response.data.message === "Shop data added successfully") {
             MySwal.fire({
