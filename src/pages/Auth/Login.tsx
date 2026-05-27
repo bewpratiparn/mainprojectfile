@@ -3,11 +3,14 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import AuthService from "../../lib/authApi";
 import { Icon } from "@iconify/react";
 import Swal from "sweetalert2";
+import CustomTextfield from "../../components/input/CustomTextfield";
+import CustomTypography from "../../components/typography/CustomTypography";
 import "./Login.css";
+import { Box } from "@mui/material";
 
 function Login() {
   const navigate = useNavigate();
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState<any>({});
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -19,7 +22,7 @@ function Login() {
     }
   }, []);
 
-  const handleChange = (event) => {
+  const handleChange = (event:any) => {
     const { name, value } = event.target;
     setInputs((prevInputs) => ({
       ...prevInputs,
@@ -27,7 +30,7 @@ function Login() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     AuthService.login(inputs.username, inputs.password)
       .then((response) => {
@@ -79,72 +82,66 @@ function Login() {
   };
 
   return (
-    <div className="bklogin">
-      <div className="outlineinlogin" onClick={handleBackClick}>
+    <Box className="bklogin">
+      <Box className="outlineinlogin" onClick={handleBackClick}>
         <Icon icon="mdi:arrow-back" className="iconbacklogin" />
-      </div>
-      <div className="form-login">
+      </Box>
+      <Box className="form-login">
         <form onSubmit={handleSubmit}>
-          <h1 className="text-2xl font-bold mb-3">Login</h1>
+          <CustomTypography value="Login" gold sx={{ fontSize: '2rem', mb: 3 }} rich={undefined} onClick={undefined} />
 
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Username
-            </label>
-            <input
-              className="w-full p-2 border rounded-md"
-              type="text"
+          <Box className="mb-4">
+            <CustomTextfield
+              label="Username"
               name="username"
               value={inputs.username || ""}
               onChange={handleChange}
-              placeholder="Username"
+              placeholder="Enter your username"
             />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Password
-            </label>
-            <input
-              className="w-full p-2 border rounded-md"
-              type="password"
+          </Box>
+          <Box className="mb-4">
+            <CustomTextfield
+              label="Password"
               name="password"
+              type="password"
+              isPassword={true}
               value={inputs.password || ""}
               onChange={handleChange}
-              placeholder="Password"
+              placeholder="Enter your password"
             />
-          </div>
-          <div className="flex justify-center">
+          </Box>
+          <Box className="flex justify-center">
             <button
-              className=" w-48 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+              className="w-48 bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-md"
               type="submit"
             >
               Login
             </button>
-          </div>
-          <a href="/register" className="block text-center mt-5">
+          </Box>
+          <a href="/register" className="block text-center mt-5 text-amber-500 hover:text-amber-600">
             Register
           </a>
         </form>
-      </div>
+      </Box>
       {/* {user && (
-        <div className="custom-profile-inpagelogin">
+        <Box className="custom-profile-inpagelogin">
           <p className="text-center mb-2">Welcome, {user.username}</p>
-          <div className="flex justify-center items-center">
+          <Box className="flex justify-center items-center">
             <img
               src={user.picture}
               alt="Profile"
               className="w-20 h-20 rounded-full"
             />
-          </div>
+          </Box>
           <button
             className="block ml- mt-9 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md"
             onClick={handleLogout}
           >
             Logout
           </button>
-        </div>
+        </Box>
       )} */}
-    </div>
+    </Box>
   );
 }
 

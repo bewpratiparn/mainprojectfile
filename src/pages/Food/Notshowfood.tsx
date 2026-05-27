@@ -1,5 +1,6 @@
 import React from "react";
 import "./Notshowfood.css";
+import { Box } from "@mui/material";
 
 function Notshowfood() {
   const handleSuccess = () => {
@@ -13,16 +14,16 @@ function Notshowfood() {
   };
 
   return (
-    <div className="white-background">
-      <div className="notshowfood">ไม่เเสดงรายการอาหาร</div>
-      <div className="box-container">
+    <Box className="white-background">
+      <Box className="notshowfood">ไม่เเสดงรายการอาหาร</Box>
+      <Box className="box-container">
         {/* ภาพอาหาร */}
         <img
           src={new URL("../../assets/images/notshowfood_bg.jpg", import.meta.url).href}
           className="picture-menu"
         />
         {/* ชื่ออาหาร */}
-        <div className="food-name">ชื่ออาหาร กระเพราหมูสับใส่ไข่</div>
+        <Box className="food-name">ชื่ออาหาร กระเพราหมูสับใส่ไข่</Box>
         {/* ช่อง checkbox */}
         <input
           className="form-check-input"
@@ -30,17 +31,17 @@ function Notshowfood() {
           defaultValue
           id="flexCheckDefault"
         />
-      </div>
+      </Box>
       {/* ปุ่ม success และ cancel */}
-      <div className="grid-button">
+      <Box className="grid-button">
         <button className="success-button" onClick={handleSuccess}>
           ยืนยัน
         </button>
         <button className="cancel-button" onClick={handleCancel}>
           ยกเลิก
         </button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

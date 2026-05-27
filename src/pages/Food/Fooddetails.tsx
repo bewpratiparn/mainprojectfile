@@ -5,6 +5,7 @@ import TranslateService from "../../lib/translateApi";
 import { Icon } from "@iconify/react";
 import { Button, CircularProgress } from "@mui/material";
 import "./Fooddetails.css";
+import { Box } from "@mui/material";
 
 function Fooddetails() {
   const navigate = useNavigate(); // Use the useNavigate hook
@@ -83,12 +84,12 @@ function Fooddetails() {
 
   if (loading)
     return (
-      <div className="loading-container">
+      <Box className="loading-container">
         <CircularProgress size={80} thickness={4} color="primary" />
-      </div>
+      </Box>
     );
 
-  if (error) return <div>{error}</div>;
+  if (error) return <Box>{error}</Box>;
 
   const { Food_name, Food_price, Food_picture, Food_element, food_elements } =
     foodDetails;
@@ -97,10 +98,10 @@ function Fooddetails() {
   };
 
   return (
-    <div className="bk191">
-      <div className="card2">
+    <Box className="bk191">
+      <Box className="card2">
 
-        <div className="custom-select191">
+        <Box className="custom-select191">
           <select
             className="TranslateHome666"
             value={isThai ? "th" : "en"}
@@ -124,34 +125,34 @@ function Fooddetails() {
               alt="UK"
             />
           )}
-        </div>
-        <div className="Outline-inFooddetails">
+        </Box>
+        <Box className="Outline-inFooddetails">
           <Icon
             icon="mdi:arrow-back"
             className="button-back-inFooddetails"
             onClick={handleBackClick}
           />
-        </div>
-        <div className="fooddetail888">
+        </Box>
+        <Box className="fooddetail888">
           {isThai ? "รายละเอียดเกี่ยวกับอาหาร" : "Food Details"}
-        </div>
-        <div className="customfooddetail">
-          <div className="details">
-            <div className="food-container">
-              <div className="ingredients-label">
+        </Box>
+        <Box className="customfooddetail">
+          <Box className="details">
+            <Box className="food-container">
+              <Box className="ingredients-label">
                 {isThai ? "ชื่ออาหาร : " : "Food Name: "}
-              </div>
-              <div className="Food_name">{Food_name}</div>
-            </div>
-            <div className="price-container">
-              <div className="ingredients-label">
+              </Box>
+              <Box className="Food_name">{Food_name}</Box>
+            </Box>
+            <Box className="price-container">
+              <Box className="ingredients-label">
                 {isThai ? "ราคา : " : "Price:"}
-              </div>
-              <div className="Food_price">
+              </Box>
+              <Box className="Food_price">
                 {Food_price} {isThai ? "บาท" : "THB"}
-              </div>
-            </div>
-          </div>
+              </Box>
+            </Box>
+          </Box>
 
           <img
             className="img5"
@@ -159,22 +160,22 @@ function Fooddetails() {
             alt={`${isThai ? "รูปภาพของ" : "Image of"} ${Food_name}`}
           />
 
-          <div className="watudip-container">
-            <div className="watudip-label">
+          <Box className="watudip-container">
+            <Box className="watudip-label">
               {isThai ? "วัตถุดิบ " : "Ingredients :"}
-            </div>
-            <div className="showingredient">{food_elements.join(", ")}</div>
-          </div>
+            </Box>
+            <Box className="showingredient">{food_elements.join(", ")}</Box>
+          </Box>
 
-          <div className="containner-detailfood">
-            <div className="description-label">
+          <Box className="containner-detailfood">
+            <Box className="description-label">
               {isThai ? "รายละเอียดอาหาร " : "Food Description :"}
-            </div>
-            <div className="detailfood">{Food_element}</div>
-          </div>
-        </div>
-      </div>
-    </div>
+            </Box>
+            <Box className="detailfood">{Food_element}</Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
 
   );
 }

@@ -6,6 +6,7 @@ import TranslateService from "../../lib/translateApi";
 import "semantic-ui-css/semantic.min.css";
 import { Icon } from "@iconify/react";
 import Swal from "sweetalert2";
+import { Box } from "@mui/material";
 
 function Translate() {
   const navigate = useNavigate();
@@ -60,14 +61,14 @@ function Translate() {
   return (
     <>
 
-      <div className="app-body">
+      <Box className="app-body">
 
-        <div className="form-control-Translate">
-          <div className="Outlinebackintranslate" onClick={handleBackClick}>
+        <Box className="form-control-Translate">
+          <Box className="Outlinebackintranslate" onClick={handleBackClick}>
             <Icon icon="mdi:arrow-back" className="backintranslate" />
-          </div>
+          </Box>
           <form onSubmit={submitTranslate}>
-            <div className="header"> Translator</div>
+            <Box className="header"> Translator</Box>
 
             <textarea
               id="inputText"
@@ -76,7 +77,7 @@ function Translate() {
               value={inputText}
               onChange={handleInputChange}
             />
-            <div className="long-select-language">
+            <Box className="long-select-language">
               <select
                 className="language-select"
                 onChange={handleLanguageChange}
@@ -91,7 +92,7 @@ function Translate() {
                   </option>
                 ))}
               </select>
-            </div>
+            </Box>
 
             <textarea
               placeholder="Your Result Translation.."
@@ -108,8 +109,8 @@ function Translate() {
               Translate
             </Button>
           </form>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </>
   );
 }

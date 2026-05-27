@@ -9,7 +9,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.css";
 import Showuser from "../User/Showuser";
-// import { Icon } from "@iconify/react";
+import CustomTextfield from "../../components/input/CustomTextfield";
+import CustomTypography from "../../components/typography/CustomTypography";
+import { Box, Stack } from "@mui/material";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faFlag } from '@fortawesome/free-solid-svg-icons';
 
@@ -146,8 +148,14 @@ function Home() {
     <>
       <Showuser />
 
-      <div className="containerhome">
-        <div className="custom-select666">
+      <Box className="containerhome">
+        <Box className="custom-select666">
+          {language === 'en' && (
+            <img src={new URL("../../assets/images/uk-flag.png", import.meta.url).href} alt="English" />
+          )}
+          {language === 'th' && (
+            <img src={new URL("../../assets/images/thailand-flag.png", import.meta.url).href} alt="Thailand" />
+          )}
           <select
             className=""
             value={language}
@@ -160,57 +168,41 @@ function Home() {
               English
             </option>
           </select>
-          {language === 'en' && (
-            <img src={new URL("../../assets/images/uk-flag.png", import.meta.url).href} alt="Thailand" />
-          )}
-          {language === 'th' && (
-            <img src={new URL("../../assets/images/thailand-flag.png", import.meta.url).href} alt="Thailand" />
-          )}
-        </div>
-        <div className="boxsearch">
-          <input
-            className="inputsearch"
-            type="text"
-            id="default-search"
-            placeholder="้   ค้นหาร้านของคุณได้ที่นี่..."
+        </Box>
+        <Box className="boxsearch" style={{ width: '80%', margin: '0 auto', marginTop: '20px' }}>
+          <CustomTextfield
+            search={true}
+            placeholder="ค้นหาร้านของคุณได้ที่นี่..."
             value={searchTerm}
-            onChange={(e) => handleFilter(e.target.value)}
+            onChange={(e: any) => handleFilter(e.target.value)}
+            clearIcon={true}
+            onClear={() => handleFilter("")}
           />
-        </div>
-        <div className="shopfood007 text-3xl font-bold text-center  text-white ">
-          {language === "th" ? "ร้านอาหาร" : "Restaurants"}
-        </div>
+        </Box>
+        <Box className="shopfood007 text-center mt-5 mb-5">
+          <CustomTypography 
+            value={language === "th" ? "ร้านอาหาร" : "Restaurants"}
+            gold={true}
+            sx={{ fontSize: '2.5rem' }} rich={undefined} onClick={undefined}          />
+        </Box>
 
-        <div className="whatthehall">
+        <Box className="whatthehall">
           {Array.isArray(datasearch) &&
-            datasearch.map((d, i) => (
-              <div
+            datasearch.map((d: any, i) => (
+              <Box
                 key={i}
                 className="custom-backgroundhome1111"
               >
-                <div className="container-storewtf">
-                  <div className="card1111">
+                <Box className="container-storewtf">
+                  <Box className="card1111">
                     <img
                       src={d.shop_picture}
                       alt={d.shop_name}
                       className="picture-home rounded-lg"
                     />
-                    <div className="card-outdatastore">
-                      <div className="data-storehome">
-                        {/* <div className="shop_id">
-                          {language === "th" ? "ไอดีร้าน" : "Shop ID"}:
-                          {searchTerm &&
-                            String(d.shop_id)
-                              .toLowerCase()
-                              .includes(searchTerm.toLowerCase()) ? (
-                            <span style={{ backgroundColor: "#ff9800" }}>
-                              {d.shop_id}
-                            </span>
-                          ) : (
-                            d.shop_id
-                          )}
-                        </div> */}
-                        <div className="shop_id">
+                    <Box className="card-outdatastore">
+                      <Stack direction="column" spacing={1} className="data-storehome">
+                        <Box className="shop_id">
                           {language === "th" ? "ชื่อร้านค้า" : "Shop Name"}:
                           {searchTerm &&
                             d.shop_name
@@ -222,8 +214,8 @@ function Home() {
                           ) : (
                             d.shop_name
                           )}
-                        </div>
-                        <div className="shop_id">
+                        </Box>
+                        <Box className="shop_id">
                           {language === "th" ? "สถานที่" : "Location"}:
                           {searchTerm && d.shop_location.toLowerCase().includes(searchTerm.toLowerCase()) ? (
                             <a
@@ -239,13 +231,13 @@ function Home() {
                               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.shop_location)}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              style={{ textDecoration: "underline", color: "black" }}
+                              style={{ textDecoration: "underline", color: "white" }}
                             >
                               {d.shop_location}
                             </a>
                           )}
-                        </div>
-                        <div className="shop_id">
+                        </Box>
+                        <Box className="shop_id">
                           {language === "th" ? "เบอร์โทรศัพท์" : "Phone"}:{" "}
                           {searchTerm &&
                             d.shop_phone
@@ -257,8 +249,8 @@ function Home() {
                           ) : (
                             d.shop_phone
                           )}
-                        </div>
-                        <div className="shop_id">
+                        </Box>
+                        <Box className="shop_id">
                           {language === "th"
                             ? "วันเวลาเปิด-ปิด"
                             : "Opening Hours"}
@@ -273,8 +265,8 @@ function Home() {
                           ) : (
                             d.shop_time
                           )}
-                        </div>
-                        <div className="shop_id">
+                        </Box>
+                        <Box className="shop_id">
                           {language === "th" ? "ตราสัญลักษณ์" : "Symbol"}:{" "}
                           {searchTerm &&
                             d.shop_text
@@ -287,84 +279,33 @@ function Home() {
                             d.shop_text
                           )}
                           {d.shop_text.toLowerCase().includes("halal") && (
-                            <div className="halal-image">
+                            <Box className="halal-image">
                               <img
                                 src={new URL("../../assets/images/halal_icon.jpg", import.meta.url).href}
                                 alt="Halal"
                               />
-                            </div>
+                            </Box>
                           )}
                           {d.shop_text.toLowerCase().includes("vegetarian") && (
-                            <div className="vegetarian-image">
+                            <Box className="vegetarian-image">
                               <img
                                 src={new URL("../../assets/images/vegan_icon.jpg", import.meta.url).href}
                                 alt="Vegetarian"
                               />
-                            </div>
+                            </Box>
                           )}
                           {d.shop_text.toLowerCase().includes("mangswirat") && (
-                            <div className="mangswirat-image">
+                            <Box className="mangswirat-image">
                               <img
                                 src={new URL("../../assets/images/mangswirat_icon.jpeg", import.meta.url).href}
                                 alt="Mangswirat"
                               />
-                            </div>
+                            </Box>
                           )}
-                        </div>
-                      </div>
-                      {/* <div>
-                        <h2 className="underline underline-offset-4 pt-3 text-1xl">
-                          {language === "th" ? "รายการอาหาร" : "Food List"}{" "}
-                        </h2>
-                        <Slider {...settings}>
-                          {foodData
-                            .filter((food) => food.shop_id === d.shop_id)
-                            .map((food, index) => (
-                              <div key={index}>
-
-                                <Link
-                                  to={{
-                                    pathname: "/Fooddetails",
-                                    search: `?food_id=${food.food_id
-                                      }&Food_name=${food.Food_name}&Food_price=${food.Food_price
-                                      }&Food_picture=${encodeURIComponent(
-                                        food.Food_picture
-                                      )}&Food_element=${food.Food_element
-                                      }&food_elements=${food.food_elements.join(
-                                        ", "
-                                      )}`,
-                                  }}
-                                >
-                                  <h3 className=" underline-offset-4 pt-3 text-2xl">
-                                    {searchTerm &&
-                                      food.Food_name.toLowerCase().includes(
-                                        searchTerm.toLowerCase()
-                                      ) ? (
-                                      <span
-                                        style={{ backgroundColor: "yellow" }}
-                                      >
-                                        {food.Food_name}
-                                      </span>
-                                    ) : (
-                                      food.Food_name
-                                    )}
-                                  </h3>
-                                  <div className="picturefood">
-                                    <img
-                                      className="rounded-lg mt-3 w-3 h-55"
-                                      src={`${food.Food_picture}`}
-                                      alt={food.Food_name}
-                                      style={{ width: "100%" }}
-                                    />
-                                  </div>
-                                </Link>
-                              </div>
-
-                            ))}
-                        </Slider>
-                      </div> */}
-                    </div>
-                    <div className="buttongostore">
+                        </Box>
+                      </Stack>
+                    </Box>
+                    <Box className="buttongostore">
                       <Link
                         to={{
                           pathname: `/Store_information`,
@@ -374,18 +315,18 @@ function Home() {
                             )}&shop_location=${d.shop_location}&shop_phone=${d.shop_phone
                             }&shop_time=${d.shop_time}&shop_text=${d.shop_text}`,
                         }}
-                        className="bg-amber-500 py-2 px-4 text-white font-bold rounded-full"
+                        className="bg-amber-500 py-2 px-4 text-white font-bold rounded-full inline-block"
                         onClick={() => handleShopClick(d.shop_id)}
                       >
-                        {language === "th" ? "ไปยังร้านค้า" : "Shop"}:{" "}
+                        {language === "th" ? "ไปยังร้านค้า" : "Shop"}
                       </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
             ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </>
   );
 }

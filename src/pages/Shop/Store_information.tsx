@@ -4,6 +4,7 @@ import TranslateService from "../../lib/translateApi";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import "./Store_information.css";
 import { Icon } from "@iconify/react";
+import { Box } from "@mui/material";
 
 function Store_information() {
   const navigate = useNavigate();
@@ -140,12 +141,12 @@ function Store_information() {
 
 
   return (
-    <div className="bk191">
-      <div className="card2">
-        <div className="Outline" onClick={handleBackClick}>
+    <Box className="bk191">
+      <Box className="card2">
+        <Box className="Outline" onClick={handleBackClick}>
           <Icon icon="mdi:arrow-back" className="back" />
-        </div>
-        <div className="outlerlineedit">
+        </Box>
+        <Box className="outlerlineedit">
           <Icon
             icon="bxs:edit"
             className="icon-with-hover"
@@ -157,10 +158,10 @@ function Store_information() {
               ? "เเก้ไขข้อมูลร้านค้า"
               : "Edit store information"}
           </span>
-        </div>
+        </Box>
 
         {/* Language Selector */}
-        <div className="custom-select191">
+        <Box className="custom-select191">
           <select
             className="TranslateHome666"
             value={language}
@@ -185,54 +186,54 @@ function Store_information() {
               alt="Thai Flag"
             />
           )}
-        </div>
-        <div className="store-information-container">
-          <div className="store-details">
+        </Box>
+        <Box className="store-information-container">
+          <Box className="store-details">
             <img
               src={shop_picture}
               className="image-store"
               alt={shop_picture}
             />
-            <div className="container-description">
-              <div className="container-box">
-                <div className="color-inside">
-                  <div className="store-name">
+            <Box className="container-description">
+              <Box className="container-box">
+                <Box className="color-inside">
+                  <Box className="store-name">
                     {translatedLabels.shopNameLabel} {translatedShopName}
-                  </div>
-                  <div className="location">
+                  </Box>
+                  <Box className="location">
                     {translatedLabels.shopLocationLabel}{" "}
                     {translatedShopLocation}
-                  </div>
-                  <div className="phone">
+                  </Box>
+                  <Box className="phone">
                     {translatedLabels.shopPhoneLabel} {translatedShopPhone}
-                  </div>
-                  <div className="time">
+                  </Box>
+                  <Box className="time">
                     {translatedLabels.shopTimeLabel} {translatedShopTime}
-                  </div>
-                  <div className="symbol">
+                  </Box>
+                  <Box className="symbol">
                     {translatedLabels.shopTextLabel} {translatedShopText}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="grid-container2">
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+        <Box className="grid-container2">
           {translatedFoodItems.map((item, index) => (
-            <div className="grid-item-wrapper" key={index}>
-              <div className="grid-item">
+            <Box className="grid-item-wrapper" key={index}>
+              <Box className="grid-item">
                 <img
                   src={item.Food_picture}
                   className="picture-menu"
                   alt={`รูปภาพของ ${item.Food_picture}`}
                 />
-                <div>
+                <Box>
                   {translatedLabels.foodNameLabel} {item.Food_name}
-                </div>
-                <div>
+                </Box>
+                <Box>
                   {translatedLabels.foodPriceLabel} {item.Food_price}{" "}
                   {translatedLabels.currencyLabel}
-                </div>
+                </Box>
                 <Link
                   to={{
                     pathname: `/Fooddetails`,
@@ -243,12 +244,12 @@ function Store_information() {
                 >
                   {translatedLabels.watchdetail}
                 </Link>
-              </div>
-            </div>
+              </Box>
+            </Box>
           ))}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

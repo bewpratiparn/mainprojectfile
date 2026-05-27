@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react";
 import FoodService from "../../lib/foodApi";
 import Resizer from "react-image-file-resizer";
 import "./AddFood.css";
+import { Box } from "@mui/material";
 
 function AddFood() {
   const navigate = useNavigate();
@@ -112,18 +113,18 @@ function AddFood() {
     }, 2000); // Delay of 2 seconds
   };
   return (
-    <div className="backgroundfood">
-      <div className="outlineinaddfood" onClick={handleBackClick}>
+    <Box className="backgroundfood">
+      <Box className="outlineinaddfood" onClick={handleBackClick}>
         <Icon icon="mdi:arrow-back" className="backinaddfood" />
-      </div>
-      <div className="boxtextfood">
-        <div className="block text-gray-700 text-2xl font-bold mb-8 ">
+      </Box>
+      <Box className="boxtextfood">
+        <Box className="block text-gray-700 text-2xl font-bold mb-8 ">
           เพิ่มข้อมูลอาหาร
-        </div>
+        </Box>
         <form onSubmit={handleSubmit}>
-          <div className="grid gap-6 mb-6 md:grid-cols-1">
-            <div>
-              <div className="mb-4">
+          <Box className="grid gap-6 mb-6 md:grid-cols-1">
+            <Box>
+              <Box className="mb-4">
                 <label className="block text-gray-700 text-xl font-bold mb-2">
                   ชื่อเมนู
                 </label>
@@ -135,8 +136,8 @@ function AddFood() {
                   value={input.Food_name}
                   onChange={handleChange}
                 />
-              </div>
-              <div className="mb-4">
+              </Box>
+              <Box className="mb-4">
                 <label className="block text-gray-700 text-xl font-bold mb-2">
                   องค์ประกอบอาหาร
                 </label>
@@ -147,8 +148,8 @@ function AddFood() {
                   value={input.Food_element}
                   onChange={handleChange}
                 />
-              </div>
-              <div className="mb-4">
+              </Box>
+              <Box className="mb-4">
                 <label className="block text-gray-700 text-xl font-bold mb-2">
                   ราคา
                 </label>
@@ -160,8 +161,8 @@ function AddFood() {
                   value={input.Food_price}
                   onChange={handleChange}
                 />
-              </div>
-              <div className="mb-4">
+              </Box>
+              <Box className="mb-4">
                 <label className="block text-gray-700 text-xl font-bold mb-2">
                   เพิ่มรูปอาหาร
                 </label>
@@ -171,28 +172,28 @@ function AddFood() {
                   type="file"
                   onChange={handleChange}
                 />
-                <div>
+                <Box>
                   {imageURL && (
                     <img src={imageURL} alt="Food" className="imgaddfood" />
                   )}
-                </div>
-              </div>
-            </div>
-          </div>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
 
-          <div className="buttonContainerfood">
-            <div className="buttonfoodsubmit">
+          <Box className="buttonContainerfood">
+            <Box className="buttonfoodsubmit">
               <button type="submit">ยืนยัน</button>
-            </div>
-            <div className="buttonfoodcancel">
+            </Box>
+            <Box className="buttonfoodcancel">
               <button type="button" onClick={handleReset}>
                 ยกเลิก
               </button>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </form>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

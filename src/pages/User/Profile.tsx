@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { ButtonOr } from 'semantic-ui-react';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { Box } from "@mui/material";
 
 function Profile() {
   const navigate = useNavigate()
@@ -47,18 +48,18 @@ const logout = () => {
   localStorage_removeItem('token')
   Navigatea('/')
 }
-if (isLoaded) return (<div>Loading</div>)
+if (isLoaded) return (<Box>Loading</Box>)
 else {
     return (
-      <div>
-          <div>{user.id}</div>
-          <div>{user.fname}</div>
-          <div>{user.lname}</div>
-          <div>{user.username}</div>
-          <div>{user.email}</div>
-          <div><img src={user.avatar} alt={user.id} width={100}/></div>
-          <div><button onClick={logout}>logout</button></div>
-      </div>
+      <Box>
+          <Box>{user.id}</Box>
+          <Box>{user.fname}</Box>
+          <Box>{user.lname}</Box>
+          <Box>{user.username}</Box>
+          <Box>{user.email}</Box>
+          <Box><img src={user.avatar} alt={user.id} width={100}/></Box>
+          <Box><button onClick={logout}>logout</button></Box>
+      </Box>
       )
   }
 }

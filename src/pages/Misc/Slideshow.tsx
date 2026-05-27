@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import FoodService from '../../lib/foodApi';
 import './Slideshow.css'; // Import CSS file or add styles inline
+import { Box } from "@mui/material";
 
 function Slideshow() {
   const [slideIndex, setSlideIndex] = useState(1);
@@ -50,13 +51,13 @@ function Slideshow() {
   }
 
   return (
-    <div className="slideshow-container">
+    <Box className="slideshow-container">
       {slidesData.map((slide, index) => (
-        <div className="mySlides fade" key={index}>
-          <div className="numbertext">{index + 1} / {slidesData.length}</div>
-          <div className="text">{slide.Food_name}</div>
+        <Box className="mySlides fade" key={index}>
+          <Box className="numbertext">{index + 1} / {slidesData.length}</Box>
+          <Box className="text">{slide.Food_name}</Box>
           <img src={slide.Food_picture} alt={`Slide ${index + 1}`} />
-        </div>
+        </Box>
       ))}
       
 
@@ -65,12 +66,12 @@ function Slideshow() {
       <a className="next" onClick={() => plusSlides(1)}>❯</a>
 
       {/* จุด */}
-      <div style={{ textAlign: 'center' }}>
+      <Box style={{ textAlign: 'center' }}>
         {slidesData.map((_, index) => (
           <span className="dot" key={index} onClick={() => currentSlide(index + 1)}></span>
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

@@ -5,6 +5,7 @@ import { Icon } from "@iconify/react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import "./Register.css";
+import { Box } from "@mui/material";
 
 function Register() {
   const navigate = useNavigate();
@@ -82,15 +83,15 @@ function Register() {
   };
 
   return (
-    <div className="bkregister">
-      <div className="outlineregister" onClick={handleBackClick}>
+    <Box className="bkregister">
+      <Box className="outlineregister" onClick={handleBackClick}>
         <Icon icon="mdi:arrow-back" className="iconbackregister" />
-      </div>
-      <div className="form-register">
+      </Box>
+      <Box className="form-register">
         <form onSubmit={handleSubmit}>
           <h1 className="text-2xl font-bold mb-3">Register</h1>
 
-          <div className="mb-4">
+          <Box className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Firstname
             </label>
@@ -103,9 +104,9 @@ function Register() {
               onChange={handleChange}
               required
             />
-          </div>
+          </Box>
 
-          <div className="mb-4">
+          <Box className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Lastname
             </label>
@@ -118,9 +119,9 @@ function Register() {
               onChange={handleChange}
               required
             />
-          </div>
+          </Box>
 
-          <div className="mb-4">
+          <Box className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Phone
             </label>
@@ -133,9 +134,9 @@ function Register() {
               onChange={handleChange}
               required
             />
-          </div>
+          </Box>
 
-          <div className="mb-4">
+          <Box className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Username
             </label>
@@ -148,9 +149,9 @@ function Register() {
               onChange={handleChange}
               required
             />
-          </div>
+          </Box>
 
-          <div className="mb-4">
+          <Box className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Password
             </label>
@@ -163,9 +164,9 @@ function Register() {
               onChange={handleChange}
               required
             />
-          </div>
+          </Box>
 
-          <div className="mb-4">
+          <Box className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Profile Picture
             </label>
@@ -176,32 +177,32 @@ function Register() {
               onChange={handleChange}
               required
             />
-          </div>
+          </Box>
 
           {selectedFile && (
-            <div className="flex justify-center mb-4">
+            <Box className="flex justify-center mb-4">
               <img
                 src={URL.createObjectURL(selectedFile)}
                 alt="Selected"
                 className="imgregister"
               />
-            </div>
+            </Box>
           )}
 
-          <div className="flex justify-center">
+          <Box className="flex justify-center">
             <button
               className="w-48 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
               type="submit"
             >
               Register
             </button>
-          </div>
+          </Box>
           <a href="/Login" className="block text-center mt-5">
             Login
           </a>
         </form>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

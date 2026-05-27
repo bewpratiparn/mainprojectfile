@@ -33,7 +33,7 @@ export default function MainLayout() {
   };
 
   const drawer = (
-    <div>
+    <Box>
       <Toolbar>
         <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
           Translate Food
@@ -52,7 +52,7 @@ export default function MainLayout() {
           </ListItem>
         ))}
       </List>
-    </div>
+    </Box>
   );
 
   return (

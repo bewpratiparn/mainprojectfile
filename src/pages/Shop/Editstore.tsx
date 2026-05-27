@@ -5,6 +5,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import Swal from "sweetalert2";
 import "./Editstore.css";
+import { Box } from "@mui/material";
 
 function Editstore() {
   const location = useLocation();
@@ -141,7 +142,7 @@ function Editstore() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Box>Loading...</Box>;
   }
   const handleBackClick = () => {
     Swal.fire({
@@ -160,22 +161,22 @@ function Editstore() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Box>Loading...</Box>;
   }
 
  
 
   return (
-    <div className="main-container">
-      <div className="outlineineditstore" onClick={handleBackClick}>
+    <Box className="main-container">
+      <Box className="outlineineditstore" onClick={handleBackClick}>
         <Icon icon="mdi:arrow-back" className="iconbackineditstore" />
-      </div>
-      <div className="flex items-center justify-center">
-        <div className="custom-form-Editstore w-15 rounded-lg text-white p-5 mt-5 ml-5">
-          <div className="labelinEditstore">เเก้ไขข้อมูลร้านค้า</div>
+      </Box>
+      <Box className="flex items-center justify-center">
+        <Box className="custom-form-Editstore w-15 rounded-lg text-white p-5 mt-5 ml-5">
+          <Box className="labelinEditstore">เเก้ไขข้อมูลร้านค้า</Box>
           <form className="" onSubmit={handleFormSubmit}>
-            <div className="control-form">
-              <div className="mb-4 text-black">
+            <Box className="control-form">
+              <Box className="mb-4 text-black">
                 <label htmlFor="shop_id" className="block">
                   Shop ID
                 </label>
@@ -188,9 +189,9 @@ function Editstore() {
                   onChange={handleEditShopIdChange}
                   required
                 />
-              </div>
+              </Box>
 
-              <div className="mb-4 text-black">
+              <Box className="mb-4 text-black">
                 <label htmlFor="shop_name" className="block">
                   ชื่อร้านค้า
                 </label>
@@ -203,8 +204,8 @@ function Editstore() {
                   onChange={handleInputChange}
                   required
                 />
-              </div>
-              <div className="mb-4 text-black">
+              </Box>
+              <Box className="mb-4 text-black">
                 <label htmlFor="shop_location" className="block">
                   สถานที่
                 </label>
@@ -217,8 +218,8 @@ function Editstore() {
                   onChange={handleInputChange}
                   required
                 />
-              </div>
-              <div className="mb-4 text-black">
+              </Box>
+              <Box className="mb-4 text-black">
                 <label htmlFor="shop_phone" className="block">
                   เบอร์ติดต่อ
                 </label>
@@ -231,9 +232,9 @@ function Editstore() {
                   onChange={handleInputChange}
                   required
                 />
-              </div>
+              </Box>
 
-              <div className="mb-4 text-black">
+              <Box className="mb-4 text-black">
                 <label htmlFor="shop_time" className="block">
                   เวลาเปิดปิด
                 </label>
@@ -246,8 +247,8 @@ function Editstore() {
                   onChange={handleInputChange}
                   required
                 />
-              </div>
-              <div className="mb-4 text-black">
+              </Box>
+              <Box className="mb-4 text-black">
                 <label htmlFor="shop_type" className="block">
                   ประเภทร้านของท่าน
                 </label>
@@ -263,9 +264,9 @@ function Editstore() {
                   <option value="Vegetarian">Vegetarian</option>
                   <option value="Nothting">Nothting</option>
                 </select>
-              </div>
+              </Box>
 
-              <div className="mb-4 ">
+              <Box className="mb-4 ">
                 <label htmlFor="shop_picture" className="block">
                   รูปภาพร้านค้า
                 </label>
@@ -283,9 +284,9 @@ function Editstore() {
                     style={{ marginTop: "10px", maxWidth: "100%" }}
                   />
                 )}
-              </div>
-            </div>
-            <div className="control-button-form">
+              </Box>
+            </Box>
+            <Box className="control-button-form">
               <button
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -299,21 +300,21 @@ function Editstore() {
               >
                 Cancel
               </button>
-            </div>
+            </Box>
           </form>
-        </div>
-      </div>
+        </Box>
+      </Box>
 
-      {/* <div className="shops-list">
+      {/* <Box className="shops-list">
         {shops.map((shop) => (
-          <div key={shop.shop_id}>
+          <Box key={shop.shop_id}>
             <h3>{shop.shop_name}</h3>
             <p>{shop.shop_location}</p>
             <button onClick={() => handleEditClick(shop)}>Edit</button>
-          </div>
+          </Box>
         ))}
-      </div> */}
-    </div>
+      </Box> */}
+    </Box>
   );
 }
 

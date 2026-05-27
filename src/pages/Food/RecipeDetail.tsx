@@ -1,8 +1,9 @@
 import React from 'react'
+import { Box } from "@mui/material";
 
 function RecipeDetail() {
   return (
-    <div>RecipeDetail</div>
+    <Box>RecipeDetail</Box>
   )
 }
 

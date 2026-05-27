@@ -4,6 +4,7 @@ import "./Showuser.css"; // Import CSS file
 import { Icon } from "@iconify/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { Box } from "@mui/material";
 
 function Showuser() {
   const [user, setUser] = useState(null);
@@ -54,21 +55,21 @@ function Showuser() {
   // If the user is not logged in, display the icon
   if (!user) {
     return (
-      <div className="show-user-container">
+      <Box className="show-user-container">
         
-      </div>
+      </Box>
     );
   }
 
   // If the user is logged in, display the user information
   return (
-    <div className="show-user-container">
-      <div className="user-info">
+    <Box className="show-user-container">
+      <Box className="user-info">
        
         <img src={user.picture} alt="Profile" className="profile-picture" />
         <p className="welcome-text">{user.username}</p>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

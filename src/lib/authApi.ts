@@ -5,7 +5,7 @@ export default class AuthService extends InstanceAuthAPI {
     return this.api.get("/authorize/")
   }
 
-  static login(username, password) {
+  static login(username:any, password:any) {
     return this.api.post("/login/", { username, password })
   }
 

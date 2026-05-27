@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import Swal from "sweetalert2";
 import "./Logout.css";
+import { Box } from "@mui/material";
 
 function Logout() {
   const navigate = useNavigate();
@@ -53,24 +54,24 @@ function Logout() {
   };
 
   return (
-    <div className="bklogout">
-      <div className="outlineinlogout" onClick={handleBackClick}>
+    <Box className="bklogout">
+      <Box className="outlineinlogout" onClick={handleBackClick}>
         <Icon icon="mdi:arrow-back" className="iconbackinlogout" />
-      </div>
+      </Box>
 
-      <div className="form-logout">
+      <Box className="form-logout">
         <h1 className="text-2xl font-bold mb-3"></h1>
         <p className="text-center mb-5">คุณต้องการออกจากระบบใช่หรือไม่?</p>
-        <div className="flex justify-center">
+        <Box className="flex justify-center">
           <button
             className="w-48 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md"
             onClick={handleLogout}
           >
             Logout
           </button>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

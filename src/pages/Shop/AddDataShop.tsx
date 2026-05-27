@@ -7,6 +7,7 @@ import "./AddDataShop.css";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 
 import { Icon } from "@iconify/react";
+import { Box } from "@mui/material";
 
 function AddDataShop() {
   const navigate = useNavigate();
@@ -113,18 +114,18 @@ function AddDataShop() {
   };
   return (
     <>
-      <div className="background">
-        <div className="outlineinaddshop" onClick={handleBackClick}>
+      <Box className="background">
+        <Box className="outlineinaddshop" onClick={handleBackClick}>
           <Icon icon="mdi:arrow-back" className="iconbackinaddshop" />
-        </div>
-        <div className="boxtext">
-          <div className="block text-gray-700 text-2xl font-bold mb-8 ">
+        </Box>
+        <Box className="boxtext">
+          <Box className="block text-gray-700 text-2xl font-bold mb-8 ">
             เพิ่มข้อมูลร้านค้า
-          </div>
+          </Box>
           <form onSubmit={handleSubmit}>
-            <div className="grid gap-6 mb-6 md:grid-cols-1">
-              <div>
-                <div className="mb-4">
+            <Box className="grid gap-6 mb-6 md:grid-cols-1">
+              <Box>
+                <Box className="mb-4">
                   <label className="block text-gray-700 text-xl font-bold mb-2 ">
                     ชื่อร้าน
                   </label>
@@ -137,8 +138,8 @@ function AddDataShop() {
                     onChange={handleChange}
                     style={{ borderRadius: "10px" }} // เพิ่มขอบมน
                   />
-                </div>
-                <div className="mb-4">
+                </Box>
+                <Box className="mb-4">
                   <label className="block text-gray-700 text-xl font-bold mb-2">
                     สถานที่ Map-link
                   </label>
@@ -151,8 +152,8 @@ function AddDataShop() {
                     onChange={handleChange}
                     style={{ borderRadius: "4px" }} // เพิ่มขอบมน
                   />
-                </div>
-                <div className="mb-4">
+                </Box>
+                <Box className="mb-4">
                   <label className="block text-gray-700 text-xl font-bold mb-2">
                     เบอร์โทรศัพท์
                   </label>
@@ -165,8 +166,8 @@ function AddDataShop() {
                     onChange={handleChange}
                     style={{ borderRadius: "4px" }} // เพิ่มขอบมน
                   />
-                </div>
-                <div className="mb-4">
+                </Box>
+                <Box className="mb-4">
                   <label className="block text-gray-700 text-xl font-bold mb-2">
                     วัน,เวลา เปิด-ปิด
                   </label>
@@ -179,12 +180,12 @@ function AddDataShop() {
                     onChange={handleChange}
                     style={{ borderRadius: "4px" }} // เพิ่มขอบมน
                   />
-                </div>
-                <div className="mb-4">
+                </Box>
+                <Box className="mb-4">
                   <label className="block text-gray-700 text-xl font-bold mb-2 ">
                     ประเภทร้าน
                   </label>
-                  <div className="symbol007">
+                  <Box className="symbol007">
                     <select
                       className="input-style"
                       name="shop_type"
@@ -199,7 +200,7 @@ function AddDataShop() {
                       <option value="Vegetarian">Vegetarian</option>
                       <option value="Nothing">Nothing</option>
                     </select>
-                  </div>
+                  </Box>
                   {addShop.shop_type === "Halal" && (
                     <img
                       src={new URL("../../assets/images/halal_icon.jpg", import.meta.url).href}
@@ -221,8 +222,8 @@ function AddDataShop() {
                       className="Mangswirat-Shop"
                     />
                   )}
-                </div>
-                <div className="mb-4">
+                </Box>
+                <Box className="mb-4">
                   <label className="block text-gray-700 text-xl font-bold mb-2">
                     เพิ่มรูปร้านค้า
                   </label>
@@ -232,28 +233,28 @@ function AddDataShop() {
                     type="file"
                     onChange={handleChange}
                   />
-                  <div>
+                  <Box>
                     {imageURL && (
                       <img src={imageURL} alt="Shop" className="imgaddshop" />
                     )}
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
 
-            <div className="buttonContainer">
-              <div className="buttonshopsubmit">
+            <Box className="buttonContainer">
+              <Box className="buttonshopsubmit">
                 <button type="submit">ยืนยัน</button>
-              </div>
-              <div className="buttonshopcancel">
+              </Box>
+              <Box className="buttonshopcancel">
                 <button type="button" onClick={handleReset}>
                   ยกเลิก
                 </button>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </form>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </>
   );
 }
